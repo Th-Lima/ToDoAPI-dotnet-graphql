@@ -19,6 +19,8 @@ builder.Services.AddScoped<ITaskValidator, TaskValidator>();
 
 //Handlers
 builder.Services.AddScoped<IUpsertTaskHandler, UpsertTaskHandler>();
+builder.Services.AddScoped<IGetAllTaskHandler, GetAllTaskHandler>();
+builder.Services.AddScoped<IGetByIdTaskHandler, GetByIdTaskHandler>();
 
 //Database
 builder.Services.AddDbContext<TodoContext>(option => option.UseInMemoryDatabase("TodoDatabase"));
