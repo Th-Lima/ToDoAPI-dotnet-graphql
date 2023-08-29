@@ -32,23 +32,18 @@ namespace ToDoAPI.src.BusinessRules.Handlers
             Todo entity;
 
             if(request.Id.HasValue)
-            {
                 entity = _taskRepository.GetById(request.Id.Value) ?? throw new Exception("Tarefa não encontrada!");
-            }
             else
-            {
-                entity = new Todo()
-                {
-                    Title = request.Title,
-                    Description = request.Description,
-                    IsDone = request.IsDone
-                };
+                entity = new Todo();
 
-                if(request.IsDone)
-                    entity.DateDone = DateTime.Now;
-                else
-                    entity.DateDone = null;
-            }
+            entity.Title = request.Title;
+            entity.Description = request.Description;
+            entity.IsDone = request.IsDone;
+
+            if(request.IsDone)
+                entity.DateDone = DateTime.Now;
+            else
+                entity.DateDone = null;
             
             _taskRepository.Save(entity);
             

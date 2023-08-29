@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoAPI.src.Api;
 using ToDoAPI.src.BusinessRules.Handlers;
 using ToDoAPI.src.BusinessRules.Validators;
 using ToDoAPI.src.Database;
@@ -23,7 +24,10 @@ builder.Services.AddScoped<IUpsertTaskHandler, UpsertTaskHandler>();
 builder.Services.AddDbContext<TodoContext>(option => option.UseInMemoryDatabase("TodoDatabase"));
 
 //HotChocolate
-builder.Services.AddGraphQLServer();
+builder.Services
+    .AddGraphQLServer()
+    .AddMutationType<Mutation>()
+    .AddQueryType<Query>();
 
 var app = builder.Build();
 
