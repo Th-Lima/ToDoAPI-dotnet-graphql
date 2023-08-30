@@ -1,15 +1,15 @@
-using ToDoAPI.src.Database.Domain;
+using ToDoAPI.src.BusinessRules.Handlers;
+using ToDoAPI.src.BusinessRules.Requests;
+using ToDoAPI.src.BusinessRules.Responses;
 
 namespace ToDoAPI.src.Api
 {
     public class Query
     {
-        public Todo Task()
-        {
-            return new Todo()
-            {
-                Title = "Teste"
-            };
-        }
+        public TaskResponse GetTaskById([Service] IGetByIdTaskHandler handler, GetByIdTaskRequest request) => 
+        handler.Execute(request);
+
+        public TaskListResponse GetAllTasks([Service] IGetAllTaskHandler handler) =>
+        handler.Execute();
     }
 }
